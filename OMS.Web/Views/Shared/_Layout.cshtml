@@ -1,0 +1,79 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="#2e7d32 green darken-3 navbar-fixed-top" role="navigation" style="margin-top: 1px;">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="javascript:void(0)" class="brand-logo"><img src="~/Content/Images/logo.png" style="line-height: normal; height:55px;" /></a>
+            <ul class="right hide-on-med-and-down">
+                <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "text white-text" })</li>
+                <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "text white-text" })</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "text white-text" })</li>
+                <li>@Html.ActionLink("Products", "ProductList", "Home", new { area = "" }, new { @class = "text white-text" })</li>
+            </ul>
+
+            <ul id="nav-mobile" class="sidenav text">
+                <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "text black-text" })</li>
+                <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "text black-text" })</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "text black-text" })</li>
+                <li>@Html.ActionLink("Products", "ProductList", "Home", new { area = "" }, new { @class = "text black-text" })</li>
+            </ul>
+            <a href="javascript:void(0)" data-target="nav-mobile" class="sidenav-trigger white-text"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+
+
+
+
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year </p>
+        </footer>
+    </div>
+    @*<div class="col l3 s12">
+                <h5 class="white-text">Settings</h5>
+                <ul>
+                    <li><a class="white-text" href="#!">Link 1</a></li>
+                    <li><a class="white-text" href="#!">Link 2</a></li>
+                    <li><a class="white-text" href="#!">Link 3</a></li>
+                    <li><a class="white-text" href="#!">Link 4</a></li>
+                </ul>
+            </div>
+            <div class="col l3 s12">
+                <h5 class="white-text">Connect</h5>
+                <ul>
+                    <li><a class="white-text" href="#!">Link 1</a></li>
+                    <li><a class="white-text" href="#!">Link 2</a></li>
+                    <li><a class="white-text" href="#!">Link 3</a></li>
+                    <li><a class="white-text" href="#!">Link 4</a></li>
+                </ul>
+            </div>
+        </div>*@
+    </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Topan Marketing Corp</a>
+        </div>
+    </div>
+    </footer>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/appscript")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

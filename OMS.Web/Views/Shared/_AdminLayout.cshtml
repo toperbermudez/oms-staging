@@ -1,0 +1,94 @@
+﻿@using OMS.Web.Security;
+@{ 
+    var appUser = (AppPrincipal)User;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="javascript:void(0)">Topan</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="@ViewBag.Product"><a href="@Url.Action(ProductController.ActionNameConstants.Index,ProductController.NameConst)">Product Management</a></li>
+                    <li class="@ViewBag.Order"><a href="@Url.Action(OrderController.ActionNameConstants.Index,OrderController.NameConst)">Order Management</a></li>
+                    <li class="@ViewBag.Employee"><a href="@Url.Action(EmployeeController.ActionNameConstants.Index,EmployeeController.NameConst)">Employee Management</a></li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            @*<li><a href="javascript:void(0)" data-toggle="modal" data-target="#variantModal">Variants</a></li>*@
+                            <li><a href="javascript:void(0)" id="categorybtn" data-modal-url="@Url.Action(AdminController.ActionNameConstants.CreateCategory,AdminController.NameConst)">Category</a></li>
+                            <li><a href="javascript:void(0)" id="rolebtn" data-modal-url="@Url.Action(RoleController.ActionNameConstants.CreateRole,RoleController.NameConst)">Roles</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@($"{appUser.FirstName} {appUser.LastName}")<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="javascript:void(0)">Profile</a></li>
+                            <li><a href="@Url.Action(AccountController.ActionNameConstants.Logout,AccountController.NameConst)">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr/>
+        <div id="genericModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>All right reserved &copy; @DateTime.Now.Year </p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/appscript")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

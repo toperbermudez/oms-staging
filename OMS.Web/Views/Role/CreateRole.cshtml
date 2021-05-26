@@ -1,0 +1,64 @@
+﻿@model OMS.Core.DTO.Role
+@{
+    Layout = null;
+}
+
+<div class="content">
+    <div class="modalBody">
+        <table id="roleList" class="table table-bordered table-responsive" style="width:100%">
+            <thead>
+                <tr>
+                    <td>Role Id</td>
+                    <td>Name</td>
+                    <td>Description</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div class="panel panel-primary" style="margin-top:10px;">
+            <div class="panel-heading">
+                <h4 class="panel-title">Add New Role</h4>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm(RoleController.ActionNameConstants.CreateRole,
+                                       RoleController.NameConst,
+                                       FormMethod.Post,
+                                       new { @id = "roleForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(i => i.ID)
+                    <div class="alert alert-danger alert-dismissible errorAlert" style="display:none;" role="alert">
+                        <strong id="errTitle"></strong>:<span id="errMsg"></span>
+                    </div>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2 text1" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2 text1" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @required = true } })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="modalFooter">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btnNew" style="display:none">New Role</button>
+        <button type="button" class="btn btn-primary btnSave">Save changes</button>
+    </div>
+</div>
+
+
+

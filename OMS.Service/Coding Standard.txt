@@ -1,0 +1,102 @@
+﻿Author: Francis cebu
+Date: 6.20.2018
+Version: 1.0.0
+
+Modification History
+=====
+Modified By: Francis
+Date: 6.20.2018
+=====
+
+READ CAREFULLY
+- Please read carefully this documentation regarding coding standard when you are create class, logics and other stuff that you will put in this project. PLEASE DO NOT APPLY WHAT EVER YOU 
+THINK IS CORRECT. Please schedule a discussion with me if there is something you want to change in the structure and do not apply it yet. this structure is not 100% but we need to follow 
+the existing structure to avoid confusion. 
+
+Project References
+1. OMS.Core
+2. OMS.Repository
+
+Services
+- this folder contains all of our business logics, this are the classes where you call the repositories. service class are the only classes expose in the web project, you can't call the repository
+classes directly into your web project. see example below how to create service class
+
+1. Make sure to create an interface first (please read OMS.Core coding standard.txt to know where you put this interface). please follow this naming convention: 
+I<TABLE_NAME>Service
+e.g.
+IUserService
+
+2. Create a class under Services folder. please follow this naming convention
+<TABLE_NAME>Service
+e.g.
+UserService
+
+please see below a sample class created for User Service
+
+public class UseService : IUserService
+{
+	private readonly ICrudRepository<User> _userRepo;
+	private reaonly IUserRepository _userQueryRepo;
+
+	public UserRepository (ICrudRepository<User> userRepo,
+						   IUserRepository userQueryRepo) {
+		this._userRepo = userRepo;
+		this._userQueryRepo = userQueryRepo;
+	}
+}
+
+let's break down the sample repository above. 
+• first you create your class and inherited it on the respective interface
+• as you can see we have constructor that contains 2 parameter. note that this is just an example. there is an instances that there is a service that contaisn 3 or more parameters for repostiory. 
+• the first parameter in the constructor is a generic repository, (this is already built in the repository) the 'User' inside the ICrudRepository is your 'Entity' that can be found in OMS.Entities
+project. do not use DTO in generic repository
+• the second parameter in this constructor is the one that you build. in this example we just assume that you build a custom repository. and also take note that the variable name contains 'Query'
+this is up to you if you want but we need to make sure that variable names are unique.
+
+
+Naming Methods
+- When naming methods in Services class needs to be descriptive. you also need to follow the naming convention for List of records and single records you can see below. we also have naming conventions 
+for Create/Update/Delete please see the naming convention for the this types of method
+
+List<ENTITY_THAT_YOU_NEED_TO_RETURN>
+e.g.
+public IEnumerable<User> ListActiveUsers();
+public IEnumerable<User> ListInactiveUsers();
+
+Note: when returning a list always use IEnumerable as a return type. and do not use concrete classes like List<T>, Queryable<T> etc.
+
+for single entity please follow the naming convention below:
+Get<ENTITY_THAT_YOU_NEED_TO_RETURN>
+e.g.
+public User GetActiveUsers(int id);
+public User GetInactiveUsers(int id);
+
+Create<WHAT_KIND_OF_RECORD_YOU_WILL_CREATE>
+public Response<T> CreateUser();
+public Response<T> CreateUserAccount();
+
+Update<WHAT_KIND_OF_RECORD_YOU_WILL_CREATE>
+public Response<T> UpdateUser();
+public Response<T> UpdateUserAccount();
+
+Remove<WHAT_KIND_OF_RECORD_YOU_WILL_CREATE>
+public Response<T> RemoveUser();
+public Response<T> RemoveUserAccount();
+
+let us review the method signature for the Create/Update/Delete
+• as you can see all of our create/update/delete has a return type of Response, we need to make this standard in all of our service if we are creating/updating/deleteing records, the response contains
+the following property.
+
+public class Response<T> where T : class
+{
+    public bool Success { get; set; }
+    public string ErrorMessage { get; set; }
+    public T Data { get; set; }
+}
+
+as you can see, Response class i a generic response class, this is for us to be able to return some data in the front end. example when we create a User and we need the ID we can create this kind 
+of method signature
+
+public Response<int> CreateUser()
+
+now since Response is int, the property 'Data' is an in integer type. so we can set value of 'Data' to the ID of the newly created record. so make sure to use this properly. 

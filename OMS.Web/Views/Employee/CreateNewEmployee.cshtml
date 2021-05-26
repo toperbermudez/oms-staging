@@ -1,0 +1,94 @@
+﻿@model OMS.Web.Models.EmployeeViewModel
+@{
+    Layout = null;
+}
+
+<div class="content">
+    <div class="modalBody">
+        @using (Html.BeginForm(EmployeeController.ActionNameConstants.CreateNewEmployee,
+                       EmployeeController.NameConst,
+                       FormMethod.Post,
+                       new { @id = "employeefrm" }))
+        {
+            <div class="row">
+                <div class="alert alert-danger alert-dismissible errorAlert" style="display:none;" role="alert">
+                    <strong id="errTitle"></strong>:<span id="errMsg"></span>
+                </div>
+                <h4 class="col-md-12">Personal Information</h4>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            @Html.LabelFor(m => m.FirstName)
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control",@required = true })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            @Html.LabelFor(m => m.LastName)
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @required = true })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            @Html.LabelFor(m => m.MobileNumber)
+                            @Html.TextBoxFor(m => m.MobileNumber, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            @Html.LabelFor(m => m.Email)
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            @Html.LabelFor(m => m.Gender)
+                            @Html.EnumDropDownListFor(m => m.Gender, new { @class = "form-control", @required = true })
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="col-md-12">Address Information</h4>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            @Html.LabelFor(m => m.AddressLineOne)
+                            @Html.TextBoxFor(m => m.AddressLineOne, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            @Html.LabelFor(m => m.AddressLineTwo)
+                            @Html.TextBoxFor(m => m.AddressLineTwo, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            @Html.LabelFor(m => m.City)
+                            @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            @Html.LabelFor(m => m.PostalCode)
+                            @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <h4 class="col-md-12">Account Information</h4>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            @Html.LabelFor(m => m.UserName)
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @required = true })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            @Html.LabelFor(m => m.RoleId)
+                            @Html.DropDownListFor(m => m.RoleId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control", @required = true })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            @Html.LabelFor(m => m.Password)
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @required = true })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            @Html.LabelFor(m => m.ConfirmPassword)
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @required = true })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="modalFooter">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <span class="btn btn-primary btnSaveEmployee">Save changes</span>
+    </div>
+</div>
+
+

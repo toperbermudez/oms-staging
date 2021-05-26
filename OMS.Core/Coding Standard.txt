@@ -1,0 +1,62 @@
+﻿Author: Francis cebu
+Date: 6.20.2018
+Version: 1.0.1
+
+Modification History
+=====
+Modified By: Francis
+Date: 6.20.2018
+=====
+Modified By: Francis
+Date: 6.26.2018
+=====
+
+READ CAREFULLY
+- Please read carefully this documentation regarding coding standard when you are create class, logics and other stuff that you will put in this project. PLEASE DO NOT APPLY WHAT EVER YOU 
+THINK IS CORRECT. Please schedule a discussion with me if there is something you want to change in the structure and do not apply it yet. this structure is not 100% but we need to follow 
+the existing structure to avoid confusion. 
+
+Project References
+1. all of the projects are referencing in this project (Repository/Service/Web)
+
+Folder Structure
+1. Common
+	- this is the folder where you need to put our utility classes. things that we need to use across the projects, utility methods like parsing strings, parsing integers, different kind of utility
+methods/classes. do not add business logics and database logics here. 
+2. DTO
+	- put all of the classes that you need to return in the front end or in the api. we are not returning entity classes in our methods. always use DTO classes when returning classses in your services
+3. Entities
+	- put all of the database tables here. always add data annotations on your fields like ([MaxLength(50)], [Required], etc...) make sure only database tables are allowed here. DTO/ViewModels are 
+not allowed.
+4. Interfaces
+	4.1. Repositories
+		- put all of your repository classes here. (read documentation under OMS.Repository project to see what is repository)
+	4.2. Services
+		- put all of your services classes here. (read documentation under OMS.Repository project to see what is repository)
+5. Mapper
+	- This folder contains all of our mapping configuration. right now we have 1 file there called AutoMapperCoreConfiguration.cs this file is not the one that defines our mapping. you need to create a mapping profile 
+for each area that you gonna build the mapping. please example below.
+
+- create a class for the mapping. please follow the naming convention <ENTITY_NAME>Profile. 
+
+	e.g.
+	public class UserProfile : Profile
+	{
+		protected override void Configure()
+		{
+			 Mapper.CreateMap<User,UserViewModel>();
+		}
+	}
+
+after creating a profile you need to configure this on AutoMapperCoreConfiguration.cs see example below
+
+    public static class AutoMapperCoreConfiguration
+    {
+        public static void Configure()
+        {
+            Mapper.Initialize(cfg => {
+				cfg.AddProfile(new UserProfile());
+            });
+        }
+    }
+

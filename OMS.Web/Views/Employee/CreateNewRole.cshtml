@@ -1,0 +1,38 @@
+﻿@model OMS.Web.Models.RoleViewModel
+@{
+    Layout = null;
+}
+<div class="content">
+    <div class="modalBody">
+        @using (Html.BeginForm(EmployeeController.ActionNameConstants.CreateNewRole,
+                 EmployeeController.NameConst,
+                 FormMethod.Post,
+                 new { @id = "employeefrm" }))
+       
+            {
+                <div class="row">
+                    <h4 class="col-md-12">Personal Information</h4>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                @Html.LabelFor(m => m.Name)
+                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-6 form-group">
+                                @Html.LabelFor(m => m.Description)
+                                @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+            }
+        </div>
+    <div class="modalFooter">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <span class="btn btn-primary btnSaveProduct">Save changes</span>
+    </div>
+</div>

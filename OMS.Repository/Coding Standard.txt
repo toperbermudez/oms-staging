@@ -1,0 +1,73 @@
+﻿Author: Francis cebu
+Date: 6.20.2018
+Version: 1.0.0
+
+Modification History
+=====
+Modified By: Francis
+Date: 6.20.2018
+=====
+
+READ CAREFULLY
+- Please read carefully this documentation regarding coding standard when you are create class, logics and other stuff that you will put in this project. PLEASE DO NOT APPLY WHAT EVER YOU 
+THINK IS CORRECT. Please schedule a discussion with me if there is something you want to change in the structure and do not apply it yet. this structure is not 100% but we need to follow 
+the existing structure to avoid confusion. 
+
+Project References
+1. OMS.Core
+
+Folder Structure
+1. Repositories
+- this folder should only contain repository related classes. repository classes contains methods with logics related on database. Create/Retrieve/Update/Delete but this time this folder already
+contain a what we call generic repository. Generic repository is a method that already contain the logic for adding/retrieving/updating and deleting of records in the database. 
+
+Note
+Retrieving method in this generic repository is very simple and only supports the specific table that you are using, later i will show an example how to create a repository class. if you think that
+you need to create a query that requires joining of 2 or more table you need to create a repository for it. BUT take note that this repository should only contain complex queries. 
+Create/Retrieve/Update/Delete logic should not be there. 
+
+How To Create Repository Class
+
+1. Make sure to create an interface first (please read OMS.Core coding standard.txt to know where you put this interface). please follow this naming convention: 
+I<TABLE_NAME>Repository
+e.g.
+IUserRepository
+
+2. Create a class under Repositories folder. please follow this naming convention
+<TABLE_NAME>Repository
+e.g.
+UserRepository
+
+please see below a sample class created for User Repository
+
+public class UseRepository : IUserRepository
+{
+	private readonly OMSContext _context;
+	public UserRepository (OMSContext context) {
+		this._context = context;
+	}
+}
+
+let's break down the sample repository above. 
+
+• first you create your class and inherited it on the respective interface
+• then you create a contructor that accepts 1 parameter. which is context. (Context if your database Context, in Entity Framework Code First you need the context to access your tables),
+
+Naming Methods
+- Since this repostiory main intention is for complex query most of the time we are returning list or sometimes only a single record. we need to follow this naming convention when you create a method
+in repository class. please follow this naming convention
+
+List<ENTITY_THAT_YOU_NEED_TO_RETURN>
+e.g.
+public IEnumerable<User> ListActiveUsers();
+public IEnumerable<User> ListInactiveUsers();
+
+Note: when returning a list always use IEnumerable as a return type. and do not use concrete classes like List<T>, Queryable<T> etc.
+
+for single entity please follow the naming convention below:
+Get<ENTITY_THAT_YOU_NEED_TO_RETURN>
+e.g.
+public User GetActiveUsers(int id);
+public User GetInactiveUsers(int id);
+
+

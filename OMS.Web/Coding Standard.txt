@@ -1,0 +1,18 @@
+﻿Author: Francis cebu
+Date: 6.20.2018
+Version: 1.0.0
+
+Modification History
+=====
+Modified By: Francis
+Date: 6.20.2018
+=====
+
+READ CAREFULLY
+- Please read carefully this documentation regarding coding standard when you are create class, logics and other stuff that you will put in this project. PLEASE DO NOT APPLY WHAT EVER YOU 
+THINK IS CORRECT. Please schedule a discussion with me if there is something you want to change in the structure and do not apply it yet. this structure is not 100% but we need to follow 
+the existing structure to avoid confusion. 
+
+Project References
+1. OMS.Core
+2. OMS.Service

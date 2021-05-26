@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Product Management";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Product = "active";
+}
+
+<div class="panel panel-success">
+    <div class="panel-heading clearfix">
+        <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Product List</h4>
+        <div class="pull-right">
+            <a href="javascript:void(0)" class="btn btn-primary btnAddProduct"  data-modal-url="@Url.Action(ProductController.ActionNameConstants.CreateProduct,ProductController.NameConst)">Add Product</a>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-4 col-md-4">
+                    <input type="text" class="form-control" placeholder="Search Product" id="txtProductSearch" />
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <select class="form-control" id="categoryDrpSearch">
+                        <option>--Please Select--</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12" style="margin-top:30px;">
+            <table id="productList">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Product Name</th>
+                        <th>Product Description</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
